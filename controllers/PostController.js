@@ -6,7 +6,7 @@ export const getAll = async (req, res) => {
 			.populate({ path: 'author', select: ['fullName', 'imageUrl', 'login'] })
 			.exec()
 
-		res.json(posts)
+		res.json(posts.reverse())
 	} catch (error) {
 		console.log(error)
 		res.status(500).json({
@@ -23,7 +23,7 @@ export const getOne = async (req, res) => {
 			{ _id: postId },
 			{ $inc: { viewsCount: 1 } },
 			{ new: true }
-		)
+		).populate('author')
 
 		if (!updatedPost) {
 			return res.status(404).json({ message: 'Статья не найдена' })

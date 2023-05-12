@@ -8,7 +8,24 @@ export const registerValidation = [
 	body('login', 'Логин должен содержать минимум 3 символа').isLength({
 		min: 3,
 	}),
-	body('avatarUrl', 'Неверная ссылка на аватарку').optional().isURL(),
+	body('avatarUrl', 'Неверная ссылка на аватарку').optional(),
+]
+
+export const updateValidation = [
+	body('fullName', 'Укажите корректное имя').isLength({ min: 3 }),
+	body('login', 'Логин должен содержать минимум 3 символа').isLength({
+		min: 3,
+	}),
+	body('avatarUrl', 'Неверная ссылка на аватарку').optional(),
+]
+
+export const passwordValidation = [
+	body(
+		'newPassword',
+		'Новый пароль должен содержать минимум 5 символов'
+	).isLength({
+		min: 5,
+	}),
 ]
 
 export const loginValidation = [

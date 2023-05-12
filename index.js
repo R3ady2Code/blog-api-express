@@ -7,6 +7,8 @@ import {
 	registerValidation,
 	loginValidation,
 	postCreateValidation,
+	updateValidation,
+	passwordValidation,
 } from './validations.js'
 import handleValidationErrors from './utils/handleValidationErrors.js'
 
@@ -52,8 +54,22 @@ app.post(
 	UserController.register
 )
 app.get('/auth/me', checkAuth, UserController.getMe)
+app.patch(
+	'/auth/me',
+	updateValidation,
+	handleValidationErrors,
+	checkAuth,
+	UserController.update
+)
+app.patch(
+	'/auth/password',
+	passwordValidation,
+	handleValidationErrors,
+	checkAuth,
+	UserController.changePassword
+)
 
-app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+app.post('/upload', upload.single('image'), (req, res) => {
 	res.json({
 		url: `/uploads/${req.file.originalname}`,
 	})
