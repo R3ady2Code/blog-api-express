@@ -8,7 +8,6 @@ export const getAll = async (req, res) => {
 
 		res.json(posts.reverse())
 	} catch (error) {
-		console.log(error)
 		res.status(500).json({
 			message: 'Не удалось получить статьи',
 		})
