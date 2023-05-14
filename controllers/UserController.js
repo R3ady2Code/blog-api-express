@@ -5,6 +5,19 @@ import UserModel from '../models/User.js'
 
 export const register = async (req, res) => {
 	try {
+		const users = await UserModel.find()
+
+		let newLoginIsUsed = false
+		users.forEach(({ login }) => {
+			if (login === req.body.login) newLoginIsUsed = true
+		})
+
+		if (newLoginIsUsed) {
+			return res.status(401).json({
+				message: 'Пользователь с таким логином уже существует',
+			})
+		}
+
 		const password = req.body.password
 		const salt = await bcrypt.genSalt(10)
 		const hash = await bcrypt.hash(password, salt)

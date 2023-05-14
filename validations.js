@@ -28,17 +28,12 @@ export const passwordValidation = [
 	}),
 ]
 
-export const loginValidation = [
-	body('password', 'Пароль должен содержать минимум 5 символов').isLength({
-		min: 5,
-	}),
-	body('login', 'Логин должен содержать минимум 3 символа').isLength({
-		min: 3,
-	}),
-]
-
 export const postCreateValidation = [
-	body('title', 'Введите заголовок статьи').isLength({ min: 3 }).isString(),
-	body('text', 'Введите текст статьи').isLength({ min: 5 }).isString(),
+	body('title', 'Введите заголовок статьи(минимум 3 символа)')
+		.isLength({ min: 3 })
+		.isString(),
+	body('text', 'Введите текст статьи(минимум 5 символов)')
+		.isLength({ min: 5 })
+		.isString(),
 	body('imageUrl', 'Неверная ссылка на изображение').optional().isString(),
 ]

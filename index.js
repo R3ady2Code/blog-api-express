@@ -5,7 +5,6 @@ import cors from 'cors'
 
 import {
 	registerValidation,
-	loginValidation,
 	postCreateValidation,
 	updateValidation,
 	passwordValidation,
@@ -41,12 +40,7 @@ app.use(express.json())
 app.use(cors())
 app.use('/uploads', express.static('uploads'))
 
-app.post(
-	'/auth/login',
-	loginValidation,
-	handleValidationErrors,
-	UserController.login
-)
+app.post('/auth/login', handleValidationErrors, UserController.login)
 app.post(
 	'/auth/register',
 	registerValidation,
